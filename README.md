@@ -1,28 +1,21 @@
-# EV Purchase Intention: Impact of Autonomous Driving Features
+# EV Purchase Intention
 
-> **Competition**: 15th National College Student Market Research Competition  
-> **Timeline**: December 2024 - March 2025  
-> **License**: MIT
-
----
+Investigating how autonomous driving features influence consumers' purchase intention for New Energy Vehicles (NEVs) through survey-based econometric analysis.
 
 ## Overview
 
-This project investigates how autonomous driving features influence consumers' purchase intention for New Energy Vehicles (NEVs). Based on 622 survey responses, we employ:
-
-- **Ordered Logit Regression** — handle ordinal dependent variables
-- **Bootstrap Mediation Analysis** — test indirect effects through driving enjoyment and travel efficiency
-- **Heterogeneity Analysis** — identify group differences across demographics
-- **ML + SHAP** — validate results with machine learning interpretability
+Based on 622 survey responses collected in China (2024–2025), this project applies **ordered logit regression**, **bootstrap mediation analysis**, **heterogeneity testing**, and **ML + SHAP interpretability** to understand the key drivers behind NEV purchase decisions.
 
 ## Key Findings
 
-| Hypothesis | Path | Result | Conclusion |
-|------------|------|--------|-----------|
-| H1 | Tech Trust → Purchase Intention | OR=2.77, p<0.001 | ✅ Supported |
-| H2 | Perceived Value → Purchase Intention | OR=2.20, p<0.001 | ✅ Supported |
-| H3 | Tech Trust → Enjoyment → Intention | 35% mediation | ✅ Partial mediation |
-| H4 | Value → Efficiency → Intention | Significant | ✅ Partial mediation |
+| Hypothesis | Path | Estimate | Result |
+|------------|------|----------|--------|
+| H1 | Tech Trust → Purchase Intention | OR=2.77, p<0.001 | Significant |
+| H2 | Perceived Value → Purchase Intention | OR=2.20, p<0.001 | Significant |
+| H3 | Tech Trust → Enjoyment → Intention | 35% mediation | Partial mediation |
+| H4 | Value → Efficiency → Intention | Significant | Partial mediation |
+
+Both technology trust and perceived value are significant predictors of purchase intention, with indirect effects operating through driving enjoyment and travel efficiency.
 
 ## Key Improvements
 
@@ -34,9 +27,11 @@ This project investigates how autonomous driving features influence consumers' p
 
 ## Data Sources
 
-- **Sample**: 622 consumers surveyed in China (2024-2025)
-- **Variables**: 39 items covering tech trust, perceived value, driving enjoyment, travel efficiency, demographics
-- **Location**: `data/raw/data.csv`
+| Source | Description |
+|--------|-------------|
+| Survey data | 622 consumers in China (2024–2025) |
+| Variables | 39 items: tech trust, perceived value, driving enjoyment, travel efficiency, demographics |
+| Location | `data/raw/data.csv` |
 
 ## Project Structure
 
@@ -48,48 +43,42 @@ ev-purchase-intention/
 │   ├── heterogeneity.py      # Group comparison + LR test
 │   └── ml_shap.py           # ML prediction + SHAP
 ├── notebooks/
-│   └── 01_ev_purchase_intention.ipynb  # Complete analysis workflow
+│   └── 01_ev_purchase_intention.ipynb
 ├── figures/                  # Output visualizations
 ├── data/raw/                 # Raw survey data
 ├── main.py                   # CLI entry point
-├── README.md
-├── DATA.md
 ├── requirements.txt
-└── LICENSE
+├── LICENSE
+└── README.md
 ```
 
-## Quick Start
+## Getting Started
+
+### 1. Install Dependencies
 
 ```bash
-# Clone and install dependencies
-git clone https://github.com/YOUR_USERNAME/ev-purchase-intention.git
-cd ev-purchase-intention
 pip install -r requirements.txt
-
-# Run all analyses
-python main.py
-
-# Or open notebook
-jupyter notebook notebooks/01_ev_purchase_intention.ipynb
 ```
+
+### 2. Run Locally
+
+```bash
+python main.py
+```
+
+### 3. Run on Google Colab
+
+Upload `notebooks/01_ev_purchase_intention.ipynb` to [Google Colab](https://colab.research.google.com/) to run directly.
 
 ## Methodology
 
 ### 1. Ordered Logit Regression
 
-Custom implementation of the proportional odds model. Handles the ordinal nature of purchase intention (1-5 Likert scale).
-
-```python
-from src.ordered_logit import OrderedLogitRegression
-
-model = OrderedLogitRegression()
-model.fit(X, y)
-results = model.summary()
-```
+Custom proportional odds model handling the ordinal nature of purchase intention (1–5 Likert scale). Addresses multicollinearity through selective control variable strategy, reducing VIF from 22.3 to acceptable levels.
 
 ### 2. Mediation Analysis (Bootstrap)
 
-5 mediation paths tested using 5,000 bootstrap samples:
+Five mediation paths tested using 5,000 bootstrap samples:
 
 - Tech Trust → Driving Enjoyment → Purchase Intention
 - Tech Trust → Travel Efficiency → Purchase Intention
@@ -100,37 +89,28 @@ results = model.summary()
 ### 3. Heterogeneity Analysis
 
 LR test for group differences across:
+
 - Age groups (Youth / Middle-aged / Senior)
 - Income levels (Low / Middle / High)
 - Driving experience (Novice / Experienced / Expert)
 
 ### 4. ML + SHAP
 
-Random Forest classifier with SHAP values for:
-- Model performance validation
-- Feature importance ranking
-- Prediction interpretability
+Random Forest classifier with SHAP values for model validation and feature interpretability.
 
 ## Limitations & Future Work
 
-- **Cross-sectional data**: Causal inference limited
-- **Sample scope**: Single country, urban respondents
+- **Cross-sectional data**: Causal inference limited; longitudinal tracking of attitude changes would strengthen conclusions
+- **Sample scope**: Single country, urban respondents; cross-cultural comparison could extend generalizability
 - **Future directions**:
-  - Longitudinal tracking of attitude changes
   - Field experiment with EV test drives
-  - Cross-cultural comparison
+  - Integration of revealed preference data
+  - Policy variable analysis (subsidies, regulations)
 
 ## Tech Stack
 
-| Category | Tools |
-|----------|-------|
-| Data | pandas, numpy |
-| Statistics | scipy, statsmodels |
-| ML | scikit-learn, shap |
-| Visualization | matplotlib, seaborn |
+Python · pandas · numpy · scipy · statsmodels · scikit-learn · shap · matplotlib · seaborn
 
-## References
+## License
 
-- Angrist, J. D., & Pischke, J. S. (2009). *Mostly Harmless Econometrics*
-- Hayes, A. F. (2017). *Introduction to Mediation, Moderation, and Conditional Process Analysis*
-- Lundberg, S. M., & Lee, S. I. (2017). A unified approach to interpreting model predictions
+[MIT](LICENSE)

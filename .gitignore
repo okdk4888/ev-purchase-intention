@@ -51,7 +51,7 @@ coverage.xml
 *.pot
 
 # Jupyter Notebook
-.ipynb_checkpoints
+.ipynb_checkpoints/
 
 # IPython
 profile_default/
@@ -76,12 +76,7 @@ venv.bak/
 *.swo
 *~
 
-# Data files (keep raw data)
-# data/raw/
-# !data/raw/.gitkeep
 
-# Output files (保留figures目录用于展示)
-# figures/
 
 # OS
 .DS_Store
