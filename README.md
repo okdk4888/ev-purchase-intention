@@ -52,23 +52,21 @@ ev-purchase-intention/
 └── README.md
 ```
 
-## Getting Started
+## Quick Start
 
-### 1. Install Dependencies
-
+**Option A — Run locally:**
 ```bash
+git clone https://github.com/<your-username>/ev_purchase_intention.git
+cd ev_purchase_intention
 pip install -r requirements.txt
+
+# Download data and place in data/raw/
+jupyter notebook notebooks/01_ev_purchase_intention.ipynb
 ```
 
-### 2. Run Locally
+**Option B — Run on Google Colab:**
 
-```bash
-python main.py
-```
-
-### 3. Run on Google Colab
-
-Upload `notebooks/01_ev_purchase_intention.ipynb` to [Google Colab](https://colab.research.google.com/) to run directly.
+Upload `notebooks/01_ev_purchase_intention.ipynb` to [Google Colab](https://colab.research.google.com/), then upload `data/raw/data.csv` via the file panel on the left. No local setup needed.
 
 ## Methodology
 
